@@ -38,3 +38,32 @@ Future Development:
 - Security report generation
 - Graphical user interface
 
+
+## 26 July 2026
+## Current Features
+
+### File Monitoring
+SentinelAV monitors a designated directory and detects newly created files using filesystem event monitoring.
+
+### File Metadata Collection
+The scanner module collects:
+- Filename
+- File path
+- File extension
+- File size
+- Creation timestamp
+- Modification timestamp
+- SHA256 hash
+
+### Risk Analysis
+The analyzer module performs basic rule-based assessment based on file extensions.
+
+Currently monitored file types:
+- .exe
+- .bat
+- .cmd
+- .ps1
+- .zip
+- .rar
+- .7z
+
