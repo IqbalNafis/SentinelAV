@@ -1,5 +1,67 @@
 # Development Log
 
+## 30 July 2026 — Real-time Monitoring and Scan Logging
+
+### Objective
+
+Upgrade SentinelAV from a controlled testing environment into a practical endpoint monitoring prototype.
+
+### Completed Work
+
+#### Downloads Folder Monitoring
+
+- Replaced the test `monitored/` directory with the user's Windows Downloads folder.
+- SentinelAV now observes real filesystem activity using Watchdog events.
+
+### Improvements
+
+#### Temporary File Handling
+
+During testing, browser downloads were detected as temporary files such as:
+
+- `.tmp`
+- `.crdownload`
+- `.part`
+
+Added filtering logic to prevent unnecessary scanning of incomplete downloads.
+
+### Scan Logging System
+
+Implemented `logger.py`.
+
+SentinelAV now creates persistent records inside:
+
+reports/scan_history.log
+
+
+Each scan records:
+
+- Timestamp
+- Filename
+- Extension
+- File size
+- SHA256 hash
+- Risk assessment
+- Detection reason
+
+### Testing
+
+Successfully tested:
+
+- PDF download detection
+- Temporary file filtering
+- Manual `.exe` creation
+- High-risk classification
+- Log generation
+
+### Current Status
+
+SentinelAV can now monitor real user activity, analyze new files, and preserve security events for future review.
+
+### Next Development Goal
+
+Implement a quarantine system that can isolate suspicious files.
+
 ## Phase 1: Project Initialization
 
 ### Repository Setup

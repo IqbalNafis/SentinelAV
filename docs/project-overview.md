@@ -67,3 +67,30 @@ Currently monitored file types:
 - .rar
 - .7z
 
+### 30/7/2026
+SentinelAV has successfully implemented a real-time filesystem monitoring pipeline.
+
+Current capabilities:
+
+- Monitors the Windows Downloads folder in real time
+- Detects newly created files using filesystem events
+- Extracts file metadata:
+  - Filename
+  - File path
+  - Extension
+  - File size
+  - Creation and modification timestamps
+- Generates SHA256 file hashes for identification
+- Performs basic rule-based risk analysis
+- Generates human-readable scan reports
+- Filters temporary download files such as `.tmp`, `.crdownload`, and `.part`
+- Saves scan results into a persistent scan history log
+
+### Next Steps
+
+- Improve scan history formatting
+- Add file quarantine functionality
+- Implement persistent threat database
+- Improve risk scoring system
+- Develop user notifications
+
