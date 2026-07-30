@@ -16,6 +16,8 @@ def scan_file(file_path):
     Collect basic metadata about a file.
     """
     file = Path(file_path)
+    if not file.exists():
+        return None
     file_info = {
         "name": file.name,
         "path": str(file.resolve()),
