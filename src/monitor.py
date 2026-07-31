@@ -4,6 +4,7 @@ from scanner import scan_file
 from reporter import display_report
 from analyzer import analyze_file
 from logger import save_log
+from quarantine import quarantine_file
 import time
 
 TEMP_EXTENSIONS = [ ".tmp", ".crdownload", ".part" ]
@@ -19,8 +20,11 @@ class SentinelHandler(FileSystemEventHandler):
                 print("File unavailable, skipping scan.")
                 return
             analysis = analyze_file(file_info)
-            display_report(file_info, analysis)
-            save_log(file_info, analysis)
+            if analysis["risk"] == "HIGH":
+                quarantine_file(event.src_path, analysis["reason"])
+                action = "Quarantined"
+            display_report(file_info, analysis, action)
+            save_log(file_info, analysis, action)
 
 
 def start_monitoring(path):

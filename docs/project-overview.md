@@ -94,3 +94,7 @@ Current capabilities:
 - Improve risk scoring system
 - Develop user notifications
 
+###31/7/2026
+- Automatically quarantines high-risk files
+- Records quarantine actions with detection reasons
+

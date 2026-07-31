@@ -2,7 +2,7 @@ from datetime import datetime
 from logging import log
 
 
-def save_log(file_info, analysis):
+def save_log(file_info, analysis, action=None):
     with open("reports/scan_history.log", "a") as log:
 
         log.write("\n" + "=" * 40 + "\n")
@@ -20,5 +20,10 @@ def save_log(file_info, analysis):
         log.write("\nRisk Assessment\n")
         log.write(f"Risk       : {analysis['risk']}\n")
         log.write(f"Reason     : {analysis['reason']}\n")
+
+        if action:
+            log.write(f"Action     : {action}\n")
+        else:
+            log.write("Action     : No action taken\n")
 
         log.write("=" * 40 + "\n")
