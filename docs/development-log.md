@@ -1,5 +1,48 @@
 # Development Log
 
+## 3 August 2026 — Configuration Layer Implementation
+
+Implemented external configuration management.
+
+Changes:
+- Added config.json for centralized settings
+- Added config.py loader module
+- Connected monitoring system to configuration values
+- Added configurable auto quarantine behaviour
+- Added configurable risk threshold policy
+- Added configurable log file destination
+
+SentinelAV can now operate with adjustable security settings instead of fixed code behavior.
+
+## 31 July 2026 — Quarantine Response System
+
+#### Quarantine System
+
+Implemented a quarantine module that moves high-risk files into a dedicated quarantine directory.
+
+Features:
+
+- Automatic isolation of HIGH-risk files
+- Prevents suspicious files from remaining in monitored locations
+- Records quarantine actions in scan history
+
+### Improvements
+
+Added quarantine metadata:
+
+- Detection reason
+- Timestamp of quarantine action
+
+### Updated Workflow
+
+SentinelAV now follows:
+
+Detection → Analysis → Decision → Quarantine → Logging
+
+### Current Status
+
+SentinelAV can detect, analyze, isolate, and record suspicious files in real time.
+
 ## 30 July 2026 — Real-time Monitoring and Scan Logging
 
 ### Objective

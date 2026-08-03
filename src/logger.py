@@ -2,7 +2,7 @@ from datetime import datetime
 from logging import log
 
 
-def save_log(file_info, analysis, action=None):
+def save_log(file_info, analysis, action=None, log_file="reports/scan_history.log"):
     with open("reports/scan_history.log", "a") as log:
 
         log.write("\n" + "=" * 40 + "\n")

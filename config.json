@@ -1,0 +1,6 @@
+{
+    "monitor_folder": "C:\\Users\\TUF A16\\Downloads",
+    "auto_quarantine": true,
+    "risk_threshold": "HIGH",
+    "log_file": "reports/scan_history.log"
+}
