@@ -2,6 +2,20 @@ from pathlib import Path
 import hashlib
 from datetime import datetime
 
+def detect_file_type(file_path):
+    with open(file_path, "rb") as file:
+        header = file.read(8)
+    if header.startswith(b"\x4D\x5A"):
+        return "PE executable"
+    if header.startswith(b"%PDF"):
+        return "PDF document"
+    if header.startswith(b"\x89PNG"):
+        return "PNG image"
+    if header.startswith(b"\xFF\xD8\xFF"):
+        return "JPEG image"
+    return "Unknown"
+
+
 def calculate_sha256(file_path):
     sha256 = hashlib.sha256()
 
@@ -25,7 +39,9 @@ def scan_file(file_path):
         "size": file.stat().st_size,
         "created": datetime.fromtimestamp(file.stat().st_ctime),
         "modified": datetime.fromtimestamp(file.stat().st_mtime),
-        "sha256": calculate_sha256(file_path)
+        "sha256": calculate_sha256(file_path),
+        "file_type": detect_file_type(file_path)
+        
     }
 
     return file_info

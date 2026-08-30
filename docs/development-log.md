@@ -1,5 +1,37 @@
 # Development Log
 
+## 30 August 2026
+
+### Completed
+
+* Added file readiness handling to reduce scanning failures when newly created files are temporarily unavailable.
+* Added file signature detection using magic bytes.
+* SentinelAV can now identify several file types based on file contents rather than relying solely on file extensions.
+* Added extension and detected-file-type mismatch detection.
+* Expanded filesystem monitoring to detect moved and renamed files using `on_moved()`.
+* Refactored file processing into a reusable `process_file()` pipeline to avoid duplicating scanning, analysis, quarantine, reporting, and logging logic.
+
+### Testing
+
+* Verified normal file detection and scanning.
+* Verified PDF, image, and executable file-type identification.
+* Successfully tested renamed/moved files.
+* Successfully demonstrated detection of a file whose extension did not match its detected file type.
+* Identified a known edge case where copying a file within the monitored directory can trigger a scan before Windows has finished making the copied file accessible, resulting in a temporary `PermissionError`.
+
+### Current Limitations
+
+* File-copy race conditions may still cause a temporary scanning failure.
+* `on_modified()` monitoring has not yet been implemented.
+* Risk assessment remains primarily rule-based and will be improved in a future development session.
+
+### Next Steps
+
+* Improve the risk assessment engine.
+* Introduce multiple evidence-based indicators into risk decisions.
+* Improve the explanation of detection evidence in scan reports.
+* Continue strengthening SentinelAV's detection and response capabilities.
+
 ## 3 August 2026 — Configuration Layer Implementation
 
 Implemented external configuration management.
