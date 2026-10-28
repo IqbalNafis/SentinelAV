@@ -47,38 +47,12 @@ class SentinelHandler(FileSystemEventHandler):
         if event.is_directory:
             return
 
-        if any (event.src_path.endswith(ext) for ext in TEMP_EXTENSIONS):
+        if any(event.src_path.endswith(ext) for ext in TEMP_EXTENSIONS):
             print(f"Temporary file detected: {event.src_path}, skipping scan.")
             return
+
         self.process_file(event.src_path, "New file")
-
-        if not event.is_directory:
-            if any(event.src_path.endswith(ext) for ext in TEMP_EXTENSIONS):
-                print(f"Temporary file detected: {event.src_path}, skipping scan.")
-                return
-            print("\nNew file detected!")
-            file_info = scan_file(event.src_path)
-            if file_info is None:
-                print("File unavailable, skipping scan.")
-                return
-            analysis = analyze_file(file_info)
-            risk_levels = {
-                "LOW": 1,
-                "MEDIUM": 2,
-                "HIGH": 3
-            }
-            file_risk = risk_levels[analysis["risk"]]
-            threshold = risk_levels[self.config["risk_threshold"]]
-            if file_risk >= threshold and self.config["auto_quarantine"]:
-                quarantine_file(event.src_path, analysis["reason"])
-                action = "Quarantined"
-            elif file_risk >= threshold:
-                action = "Detected - Not Quarantined"
-            else:
-                action = "Allowed"
-
-            display_report(file_info, analysis, action)
-            save_log(file_info, analysis, action, self.config["log_file"])
+        
 
     def on_moved(self, event):
         if event.is_directory:

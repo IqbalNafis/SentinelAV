@@ -1,4 +1,33 @@
 # Development Log
+## 29 October 2026
+
+### Completed
+
+Added
+
+Introduced a heuristic risk-scoring model in src/analyzer.py.
+
+Added risk indicators for executable and script extensions, file-type/extension mismatches, and compressed archives.
+
+Added a numerical score and an evidence list to the analysis result.
+
+Changed
+
+Risk levels are derived from the cumulative score:
+
+LOW: 0–1
+
+MEDIUM: 2–3
+
+HIGH: 4 or above
+
+Preserved the existing risk and reason fields for compatibility with the monitoring pipeline.
+
+Limitations
+
+Scores represent heuristic indicators, not malware probabilities or definitive malware detection.
+
+Current rules assess basic file characteristics and do not inspect file behavior or determine whether file content is malicious.
 
 ## 30 August 2026
 
